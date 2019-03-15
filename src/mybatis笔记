@@ -1,0 +1,57 @@
+mybatis配置：
+	（1）配置头部信息:<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 全局配置 -->
+  <environments default="mysql">
+  <!-- default的值用来引用id的值 -->
+  	<environment id="mysql">
+  	<!-- 事务管理 -->
+  		<transactionManager type="JDBC"></transactionManager>
+  		<!-- 数据库连接池相当于c0p3连接池POOLED -->
+  		<dataSource type="POOLED">
+  			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+  			<property name="url" value="jdbc:mysql://localhost:3306/jdbc"/>
+  			<property name="username" value="root"/>
+  			<property name="password" value="root"/>
+  		</dataSource>
+  	</environment>
+  </environments>
+  <mappers>
+    <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+  </mappers>
+</configuration>
+2》mybatis的优点不用写dao层的实现类只需要写相应的sql语句在调用相应的方法就可以实现对数据库的操作。
+3>mybatis的mappe层的xml文件配置:
+	<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+  <select id="selectBlog" parameterType="int" resultType="Blog">
+    select * from Blog where id = #{id}
+  </select>
+</mapper>
+*****这里相当于public (resultType) id(parameterType);
+<!--namespace理解成实现类的全路径-->
+<mapper namespace="a.b">
+	<!--编写需要执行的sql命令-->
+	<!--id表示方法名
+	parameterType定义参数类型相当于show(int s)的int
+	resultType:返回值类型
+	-->
+  <select id="seletLogin" resultType="Login">
+   	
+  </select>
+</mapper>
+6>meta-inf中存放数据库连接池——————》他是jdbc连接池context.xml是用来记录连接池
+的就比如c3po连接池里的配置——————
+7>parameterType使用:里面是返回的那一列的类型-->语句中是#{0}0—表示第一个参数	
+ 当需要传入两个参数时，需要用到map对象--》map<object,object> map=new HashMap<>(),map.put()-----
+ 8>别名机制
+ <!-- 别名 -->
+<typeAliases>
+<!-- <typeAlias type="com.zms.bean.Login" alias="CBL" 只给某一个实体类/> -->
+	<package name="com.zms.bean" 给那个包取别名/>
+</typeAliases>
+9》新增：
+事务的自动查询autocommit=false(默认 情况);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--maxActive最大连接的对象数量
+maxldle最大的等待被连接的对象数量
+maxwait最大的等待数量
+name为这个连接池取一个名字与Java代码相连接
+auth是给谁使用这个连接池，这里是Tomcat容器
+type是这个连接池的类型默认是javax.mysql.DataSource
+-->
+<Context>                           
+	<Resource
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/jdbc"
+		username="root"
+		password="root"
+		maxActive="100"
+		maxldle="80"
+		name="mysql"
+		auth="Container"
+		maxwait="10000"
+		type="javax.sql.DataSource"
+		/>
+</Context>

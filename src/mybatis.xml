@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 别名 -->
+<typeAliases>
+<!-- <typeAlias type="com.zms.bean.Login" alias="CBL" 只给某一个实体类/> -->
+	<package name="com.zms.bean"/>
+</typeAliases>
+<!-- 全局配置 -->
+  <environments default="mysql">
+  <!-- default的值用来引用id的值 -->
+  	<environment id="mysql">
+  	<!-- 事务管理 -->
+  		<transactionManager type="JDBC"></transactionManager>
+  		<!-- 数据库连接池相当于c0p3连接池POOLED -->
+  		<dataSource type="POOLED">
+  			<property name="driver" value="com.mysql.jdbc.Driver"/>
+  			<property name="url" value="jdbc:mysql://localhost:3306/jdbc?characterEncoding=utf8"/>
+  			<property name="username" value="root"/>
+  			<property name="password" value="root"/>
+  		</dataSource>
+  	</environment>
+  </environments>
+  <!-- 需要链接到的mappers对象 -->
+  <mappers>
+  	<mapper resource="com/zms/mapper/Loginmapper.xml"/>
+  </mappers>
+</configuration>

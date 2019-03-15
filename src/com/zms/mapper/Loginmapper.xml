@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--namespace理解成实现类的全路径-->
+<mapper namespace="a.b">
+	<!--编写需要执行的sql命令-->
+	<!--id表示方法名
+	parameterType定义参数类型相当于show(int s)的int
+	resultType:返回值类型
+	*****这里相当于public (resultType) id(parameterType);
+	-->
+  <select id="seletLogin" resultType="com.zms.bean.Login">
+  	<!--这里只可以得到一行数据，如果要多行数据
+  	只能通过添加list方法
+  	-->
+   		select * from login
+  </select>
+  <!--查找单个值-->
+  <select id="selectsimple" resultType="com.zms.bean.Login">
+  		select * from login where id_login=1
+  </select>
+  <!--查找键值对-->
+  <select id="c" resultType="com.zms.bean.Login">
+  	select * from login
+  </select>
+  <select id="d" resultType="Login" parameterType="map">
+  		select * from login where id_login>#{id}
+  </select>
+  <!--新增-->
+  <insert id="ins" parameterType="Login">
+  	insert into login(id_login,username_login,password_login) 
+  	values(default,#{username_login},#{password_login})
+  </insert>
+</mapper>
